@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmAppInfoMapper">
+
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmAppInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="app_icon" jdbcType="VARCHAR" property="appIcon" />
+    <result column="app_desc" jdbcType="VARCHAR" property="appDesc" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="range_type" jdbcType="INTEGER" property="rangeType" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, app_name, app_icon, app_desc, enterprise_id, range_type, create_user, create_time, update_user, update_time,
+    is_deleted
+  </sql>
+  <update id="updateByPrimaryKeyAndEnterpriseIdSelective" parameterType="com.zhang.sca.model.po.TDdmAppInfo">
+    update t_ddm_app_info
+    <set>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appIcon != null">
+        app_icon = #{appIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null">
+        app_desc = #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rangeType != null">
+        range_type = #{rangeType,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT} and enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmAppInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_app_info (app_name, app_icon, app_desc,enterprise_id,range_type
+    create_user, create_time, update_user,
+    update_time)
+    values (#{appName,jdbcType=VARCHAR}, #{appIcon,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR},#{enterpriseId,jdbcType=BIGINT}, #{rangeType,jdbcType=INTEGER},
+    #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT},
+    #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmAppInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="appIcon != null">
+        app_icon,
+      </if>
+      <if test="appDesc != null">
+        app_desc,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="rangeType != null">
+        range_type,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appIcon != null">
+        #{appIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null">
+        #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="rangeType != null">
+        #{rangeType,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByEnterpriseIdAndAppId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_ddm_app_info
+    where id = #{appId}
+    and enterprise_id = #{enterpriseId}
+    and is_deleted=0
+  </select>
+
+</mapper>

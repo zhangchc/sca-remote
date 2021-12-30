@@ -1,0 +1,36 @@
+server:
+  port: 8012
+#spring:
+#  application:
+#    name: sca-remote
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  datasource:
+    url: jdbc:mysql://mysql.test.yiyaowang.com/lowcode?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: lowcode
+    # 此密码是加密后的密码
+    password: d41d8cd98f00b204
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      defaultAutoCommit: true
+      initialSize: 10
+      minIdle: 10
+      maxActive: 50
+      maxWait: 1000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: true
+      testOnReturn: false
+      filters: config,stat
+      filter:
+        wall:
+          config:
+            multi-statement-allow: true
+            none-base-statement-allow: true
+      #如果是密码加密的密码，这里面需要再配置上这个
+      connection-properties: {config.decrypt=true; config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAL5W2pa9B+EnU7fQ7yZZ3k3XEuEsmHgSALFmuxT1t3hEJ3/0wOVOQYj3DNWHbJfz+GSccaa1P3Elmy93y+Bxe68CAwEAAQ==}

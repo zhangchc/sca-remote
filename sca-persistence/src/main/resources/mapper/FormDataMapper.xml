@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.FormDataMapper">
+
+    <!-- 根据map插入数据 -->
+    <insert id="insertByMap" useGeneratedKeys="true" keyProperty="dataId" parameterType="com.zhang.sca.model.po.FormDataPO">
+        INSERT INTO ${formDataPO.tableName}
+        <foreach collection="formDataPO.addMap.entrySet()" index="key" separator="," open="(" close=")">
+            ${key}
+        </foreach>
+        VALUES
+        <foreach collection="formDataPO.addMap.entrySet()" item="val" separator="," open="(" close=")">
+            #{val}
+        </foreach>
+    </insert>
+
+    <update id="updateByMap" parameterType="com.zhang.sca.model.po.FormDataPO">
+        UPDATE ${formDataPO.tableName} SET
+        <foreach item="value" index="key" collection="formDataPO.editMap" separator=",">
+            <if test="key != 'id'">
+                ${key} = #{value}
+            </if>
+        </foreach>
+        WHERE
+        <foreach item="value" index="key" collection="formDataPO.editMap" separator=" AND ">
+            <if test="key == 'id'">
+                id = #{value}
+            </if>
+        </foreach>
+    </update>
+
+    <select id="selectFormDatas" resultType="java.util.Map" parameterType="com.zhang.sca.model.po.FormDataPO" >
+        SELECT
+        <foreach collection="formDataPO.columns" item="value" separator=",">
+            ${value}
+        </foreach>
+        FROM ${formDataPO.tableName}
+            where is_deleted = 0
+        <if test="formDataPO.workflowStatus != null">
+           and workflow_status = #{formDataPO.workflowStatus}
+        </if>
+        <if test="formDataPO.queryMap != null and formDataPO.queryMap.size() > 0">
+           and
+            <foreach item="key" index="index" collection="formDataPO.queryMap.keys" separator=" AND ">
+                ${key} IN
+                <foreach collection="formDataPO.queryMap[key]" item="value" open="(" close=")" separator=",">
+                    #{value}
+                </foreach>
+            </foreach>
+        </if>
+        order by create_time desc
+        <if test="formDataPO.pageNum != null and formDataPO.pageSize != null">
+            LIMIT #{formDataPO.pageNum}, #{formDataPO.pageSize}
+        </if>
+    </select>
+
+    <select id="selectFormDataStatistics" resultType="java.util.Map" parameterType="com.zhang.sca.model.po.FormDataPO" >
+        SELECT
+            workflow_status workflowStatus,
+            count(*) num
+        FROM ${formDataPO.tableName}
+            where is_deleted = 0
+        <if test="formDataPO.workflowStatus != null">
+           and workflow_status = #{formDataPO.workflowStatus}
+        </if>
+        <if test="formDataPO.queryMap != null and formDataPO.queryMap.size() > 0">
+           and
+            <foreach item="key" index="index" collection="formDataPO.queryMap.keys" separator=" AND ">
+                ${key} IN
+                <foreach collection="formDataPO.queryMap[key]" item="value" open="(" close=")" separator=",">
+                    #{value}
+                </foreach>
+            </foreach>
+        </if>
+        group by workflow_status;
+    </select>
+
+    <select id="getFormData" resultType="java.util.HashMap" statementType="STATEMENT">
+        select * from ${tableName} where is_deleted = 0 and id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            ${ids}
+        </foreach>
+    </select>
+
+    <select id="getFormDataByEnterpriseId" resultType="java.util.HashMap" statementType="STATEMENT">
+        select * from ${tableName} where is_deleted = 0 and enterprise_id = ${enterpriseId} and id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            ${item}
+        </foreach>
+    </select>
+
+    <select id="getAllFormData" resultType="java.util.HashMap" statementType="STATEMENT">
+        select * from ${tableName} where is_deleted = 0 order by create_time desc limit 0, 20000
+    </select>
+
+    <select id="getFormDataById" resultType="java.util.HashMap" statementType="STATEMENT">
+        select * from ${tableName}
+        where id = ${id} and is_deleted = 0 order by create_time desc
+    </select>
+
+    <select id="getFormDataByIdAndEnterpriseId" resultType="java.util.HashMap" statementType="STATEMENT">
+        select * from ${tableName}
+        where id = ${id} and enterprise_id = ${enterpriseId} and is_deleted = 0
+    </select>
+
+    <update id="pseudoBatchDeleteFormData" >
+        update ${tableName}  set is_deleted = 1 where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="pseudoDeleteAllFormData" >
+        update ${tableName}  set is_deleted = 1
+    </update>
+    <update id="pseudoDeleteAllFormDataByEnterpriseId">
+        update ${tableName}  set is_deleted = 1 where enterprise_id = ${enterpriseId}
+    </update>
+    <update id="pseudoBatchDeleteFormDataByEnterpriseId">
+        update ${tableName}  set is_deleted = 1 where enterprise_id = ${enterpriseId} and id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <insert id="batchInsertFormData"  parameterType="com.zhang.sca.model.po.FormDataPO" >
+    insert into ${formDataPO.tableName}
+    <foreach collection="formDataPO.headers" item="header" separator="," open="(" close=")">
+        ${header}
+    </foreach>
+    values
+    <foreach collection="formDataPO.batchInsertMap" item="item" separator=",">
+        (
+        <foreach item="key" index="index" collection="formDataPO.headers" separator="," >
+
+            #{item.${key}}
+
+        </foreach>
+        )
+    </foreach>
+    </insert>
+</mapper>
