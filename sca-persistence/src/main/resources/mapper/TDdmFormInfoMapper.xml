@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmFormInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmFormInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="app_id" jdbcType="BIGINT" property="appId"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="form_desc" jdbcType="VARCHAR" property="formDesc"/>
+        <result column="form_json" jdbcType="VARCHAR" property="formJson"/>
+        <result column="form_json_md5" jdbcType="VARCHAR" property="formJsonMd5"/>
+        <result column="published_form_name" jdbcType="VARCHAR" property="publishedFormName"/>
+        <result column="published_form_desc" jdbcType="VARCHAR" property="publishedFormDesc"/>
+        <result column="published_form_json" jdbcType="VARCHAR" property="publishedFormJson"/>
+        <result column="published_form_json_md5" jdbcType="VARCHAR" property="publishedFormJsonMd5"/>
+        <result column="page_id" jdbcType="BIGINT" property="pageId"/>
+        <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+    </resultMap>
+
+    <resultMap id="SimpleResultMap" type="com.zhang.sca.model.po.TDdmFormInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="app_id" jdbcType="BIGINT" property="appId"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="form_desc" jdbcType="VARCHAR" property="formDesc"/>
+        <result column="form_json_md5" jdbcType="VARCHAR" property="formJsonMd5"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="published_form_name" jdbcType="VARCHAR" property="publishedFormName"/>
+        <result column="published_form_desc" jdbcType="VARCHAR" property="publishedFormDesc"/>
+        <result column="published_form_json_md5" jdbcType="VARCHAR" property="publishedFormJsonMd5"/>
+        <result column="page_id" jdbcType="BIGINT" property="pageId"/>
+        <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Simple_Column_List">
+    id, app_id, enterprise_id, page_id, form_name, form_desc, form_json_md5, published_form_name, published_form_desc, published_form_json_md5, create_user, create_time, update_user,
+    update_time
+  </sql>
+    <sql id="Base_Column_List">
+    id, app_id, enterprise_id, page_id, form_name, form_desc, form_json, form_json_md5, published_form_name, published_form_desc, published_form_json, published_form_json_md5, create_user, create_time, update_user,
+    update_time, is_deleted
+  </sql>
+    <!--  待调整的语句-->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ddm_form_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByPrimaryKeyAndEnterpriseId" parameterType="com.zhang.sca.model.po.TDdmFormInfo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ddm_form_info
+        where id = #{id}
+        and enterprise_id=#{enterpriseId}
+        and is_deleted=0
+    </select>
+    <select id="selectByPageIdAndEnterpriseId" parameterType="com.zhang.sca.model.po.TDdmFormInfo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ddm_form_info
+        where page_id = #{pageId}
+        and enterprise_id=#{enterpriseId}
+        and is_deleted=0
+    </select>
+    <select id="selectByProcessPendingUserIdAndEnterpriseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ddm_form_info where is_deleted=0 and enterprise_id = #{enterpriseId} and page_id in (
+        select distinct b.page_id from t_ddm_workflow_process_detail a
+        left join t_ddm_workflow_process b on a.process_id=b.id
+        where a.process_user_id=#{processUserId} and a.enterprise_id = #{enterpriseId} and a.current_user_node_status=1 and a.is_deleted=0
+        and b.enterprise_id = #{enterpriseId} and b.is_deleted=0)
+    </select>
+    <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmFormInfo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_ddm_form_info (app_id, enterprise_id, page_id, form_name, form_desc,
+        form_json, form_json_md5, published_form_name, published_form_desc, published_form_json,
+        published_form_json_md5, create_user,
+        update_user
+        )
+        values (#{appId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{pageId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR}, #{formDesc,jdbcType=VARCHAR},
+        #{formJson,jdbcType=VARCHAR}, #{formJsonMd5,jdbcType=VARCHAR},
+        #{publishedFormName,jdbcType=VARCHAR}, #{publishedFormDesc,jdbcType=VARCHAR},
+        #{publishedFormJson,jdbcType=VARCHAR}, #{publishedFormJsonMd5,jdbcType=VARCHAR},
+        #{createUser,jdbcType=BIGINT},
+        #{updateUser,jdbcType=BIGINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmFormInfo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_ddm_form_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="enterpriseId != null">
+                enterprise_id,
+            </if>
+            <if test="formName != null">
+                form_name,
+            </if>
+            <if test="formDesc != null">
+                form_desc,
+            </if>
+            <if test="formJson != null">
+                form_json,
+            </if>
+            <if test="pageId != null">
+                page_id,
+            </if>
+            <if test="formJsonMd5 != null">
+                form_json_md5,
+            </if>
+            <if test="publishedFormName != null">
+                published_form_name,
+            </if>
+            <if test="publishedFormDesc != null">
+                published_form_desc,
+            </if>
+            <if test="publishedFormJson != null">
+                published_form_json,
+            </if>
+            <if test="publishedFormJsonMd5 != null">
+                published_form_json_md5,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="enterpriseId != null">
+                #{enterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="formName != null">
+                #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formDesc != null">
+                #{formDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="pageId != null">
+                #{pageId,jdbcType=BIGINT},
+            </if>
+            <if test="formJson != null">
+                #{formJson,jdbcType=VARCHAR},
+            </if>
+            <if test="formJsonMd5 != null">
+                #{formJsonMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="publishedFormName != null">
+                published_form_name,
+            </if>
+            <if test="publishedFormDesc != null">
+                published_form_desc,
+            </if>
+            <if test="publishedFormJson != null">
+                published_form_json,
+            </if>
+            <if test="publishedFormJsonMd5 != null">
+                published_form_json_md5,
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmFormInfo">
+        update t_ddm_form_info
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="enterpriseId != null">
+                enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="pageId != null">
+                page_id = #{pageId,jdbcType=BIGINT},
+            </if>
+            <if test="formName != null">
+                form_name = #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formDesc != null">
+                form_desc = #{formDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="pageId != null">
+                app_id = #{pageId,jdbcType=BIGINT},
+            </if>
+            <if test="formJson != null">
+                form_json = #{formJson,jdbcType=VARCHAR},
+            </if>
+            <if test="formJsonMd5 != null">
+                form_json_md5 = #{formJsonMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="publishedFormName != null">
+                published_form_name = #{publishedFormName,jdbcType=VARCHAR},
+            </if>
+            <if test="publishedFormDesc != null">
+                published_form_desc = #{publishedFormDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="publishedFormJson != null">
+                published_form_json = #{publishedFormJson,jdbcType=VARCHAR},
+            </if>
+            <if test="publishedFormJsonMd5 != null">
+                published_form_json_md5 = #{publishedFormJsonMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhang.sca.model.po.TDdmFormInfo">
+    update t_ddm_form_info
+    set app_id = #{appId,jdbcType=BIGINT},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      form_name = #{formName,jdbcType=VARCHAR},
+      form_desc = #{formDesc,jdbcType=VARCHAR},
+      form_json = #{formJson,jdbcType=VARCHAR},
+      form_json_md5 = #{formJsonMd5,jdbcType=VARCHAR},
+      page_id = #{pageId,jdbcType=BIGINT},
+      published_form_name = #{publishedFormName,jdbcType=VARCHAR},
+      published_form_desc = #{publishedFormDesc,jdbcType=VARCHAR},
+      published_form_json = #{publishedFormJson,jdbcType=VARCHAR},
+      published_form_json_md5 = #{publishedFormJsonMd5,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        insert into t_ddm_form_info
+        (app_id, enterprise_id, page_id, form_name, form_desc, form_json, form_json_md5, page_id
+        published_form_name, published_form_json_desc,
+        published_form_json, published_form_json_md5, create_user, update_user,
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.appId,jdbcType=BIGINT}, #{item.enterpriseId,jdbcType=BIGINT}, #{item.pageId,jdbcType=BIGINT}, #{item.formName,jdbcType=VARCHAR}, #{item.formDesc,jdbcType=VARCHAR},
+            #{item.formJson,jdbcType=VARCHAR}, #{item.formJsonMd5,jdbcType=VARCHAR}, #{item.pageId,jdbcType=BIGINT},
+             #{item.publishedFormName,jdbcType=VARCHAR}, #{item.publishedFormDesc,jdbcType=VARCHAR}
+            #{item.publishedFormJson,jdbcType=VARCHAR}, #{item.publishedFormJsonMd5,jdbcType=VARCHAR},
+            #{item.createUser,jdbcType=BIGINT},
+            #{item.updateUser,jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+
+    <update id="pseudoDeleteFormInfo" parameterType="java.lang.Long">
+    update t_ddm_form_info
+    set is_deleted = 1
+    where id = #{id,jdbcType=BIGINT}
+    and enterprise_id=#{enterpriseId,jdbcType=BIGINT}
+  </update>
+    <update id="pseudoDeleteFormInfoByPageId" parameterType="java.lang.Long">
+        update t_ddm_form_info
+        set is_deleted = 1
+        where page_id = #{pageId,jdbcType=BIGINT}
+          and enterprise_id=#{enterpriseId,jdbcType=BIGINT}
+    </update>
+    <update id="createDynFormTable" parameterType="com.zhang.sca.model.po.DynFormDDLData">
+        CREATE TABLE ${ddl.tableName} (
+        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+        `enterprise_id` bigint(20) DEFAULT NULL COMMENT '企业id',
+        <foreach collection="ddl.create" item="column" separator="">
+            `${column.columnField}` ${column.columnType} DEFAULT NULL COMMENT '${column.columnDesc}',
+        </foreach>
+        `workflow_node_name` varchar(255) DEFAULT NULL COMMENT '流程审批节点名称',
+        `workflow_status` tinyint(2) DEFAULT '0' COMMENT '1.待审批;2.审批中;3.审批通过；4.审批不通过',
+        `create_user` bigint(20) DEFAULT NULL COMMENT '创建用户',
+        `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+        `update_user` bigint(20) DEFAULT NULL COMMENT '更新用户',
+        `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新日期',
+        `is_deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除(0未删除 1删除)',
+        PRIMARY KEY (`id`)
+
+        )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='动态表单应用表${ddl.formId}';
+    </update>
+    <select id="dynFormTableExist" parameterType="java.lang.String" resultType="java.lang.Long">
+    select count(*) from information_schema.tables where table_name = #{tableName}
+  </select>
+    <update id="alterDynFormTable" parameterType="com.zhang.sca.model.po.DynFormDDLData">
+        <foreach collection="ddl.add" item="column" separator="">
+            ALTER TABLE ${ddl.tableName} ADD ${column.columnField} ${column.columnType} DEFAULT NULL COMMENT
+            '${column.columnDesc}';
+        </foreach>
+        <foreach collection="ddl.delete" item="column" separator="">
+            ALTER TABLE ${ddl.tableName} DROP COLUMN ${column.columnField};
+        </foreach>
+        <foreach collection="ddl.change" item="column" separator="">
+            ALTER TABLE ${ddl.tableName} MODIFY ${column.columnField} ${column.columnType} DEFAULT NULL COMMENT
+            '${column.columnDesc}';
+        </foreach>
+    </update>
+    <select id="getFormInfoByPageIds" resultMap="SimpleResultMap">
+        select
+        <include refid="Simple_Column_List"/>
+        from t_ddm_form_info
+        where enterprise_id=#{enterpriseId,jdbcType=BIGINT} and page_id in
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getFormInfoByAppId" resultMap="SimpleResultMap">
+        select
+        <include refid="Simple_Column_List"/>
+        from t_ddm_form_info where app_id = #{appId} and is_deleted = 0
+        order by create_time ASC limit #{start}, #{size}
+    </select>
+    <select id="getFormInfoByAppIdAndEnterpriseId" resultType="com.zhang.sca.model.po.TDdmFormInfo">
+        select
+        <include refid="Simple_Column_List"/>
+        from t_ddm_form_info where app_id = #{appId} and enterprise_id = #{enterpriseId} and is_deleted = 0
+        order by create_time ASC limit #{start}, #{size}
+    </select>
+    <update id="pseudoBatchDeleteFormInfoByPageId" parameterType="java.lang.Long">
+        update t_ddm_form_info
+        set is_deleted = 1
+        where enterprise_id=#{enterpriseId,jdbcType=BIGINT} and page_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+    </update>
+</mapper>

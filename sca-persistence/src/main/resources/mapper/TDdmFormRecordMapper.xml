@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmFormRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmFormRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="form_id" jdbcType="INTEGER" property="formId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="src_content" jdbcType="VARCHAR" property="srcContent" />
+    <result column="target_content" jdbcType="VARCHAR" property="targetContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, form_id, enterprise_id, src_content, target_content, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_ddm_form_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmFormRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_form_record (form_id,enterprise_id, src_content, target_content)
+    values (#{formId,jdbcType=INTEGER}, #{enterpriseId,jdbcType=BIGINT},#{srcContent,jdbcType=VARCHAR}, #{targetContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmFormRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_form_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="formId != null">
+        form_id,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="srcContent != null">
+        src_content,
+      </if>
+      <if test="targetContent != null">
+        target_content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="formId != null">
+        #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="srcContent != null">
+        #{srcContent,jdbcType=VARCHAR},
+      </if>
+      <if test="targetContent != null">
+        #{targetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmFormRecord">
+    update t_ddm_form_record
+    <set>
+      <if test="formId != null">
+        form_id = #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="srcContent != null">
+        src_content = #{srcContent,jdbcType=VARCHAR},
+      </if>
+      <if test="targetContent != null">
+        target_content = #{targetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhang.sca.model.po.TDdmFormRecord">
+    update t_ddm_form_record
+    set form_id = #{formId,jdbcType=INTEGER},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      src_content = #{srcContent,jdbcType=VARCHAR},
+      target_content = #{targetContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    insert into t_ddm_form_record
+    (form_id, enterprise_id, src_content, target_content, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.formId,jdbcType=INTEGER}, #{item.enterpriseId,jdbcType=INTEGER}, #{item.srcContent,jdbcType=VARCHAR}, #{item.targetContent,jdbcType=VARCHAR},
+        #{item.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>

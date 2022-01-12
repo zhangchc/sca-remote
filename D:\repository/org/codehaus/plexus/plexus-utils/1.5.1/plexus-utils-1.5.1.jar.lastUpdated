@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Jan 04 15:31:22 CST 2022
+@default-nexus-http\://maven.yiyaowang.com/nexus/content/groups/public/.lastUpdated=1641281458828
+https\://repo.maven.apache.org/maven2/.lastUpdated=1641281482109
+http\://maven.yiyaowang.com/nexus/content/groups/public/.error=Could not transfer artifact org.codehaus.plexus\:plexus-utils\:jar\:1.5.1 from/to nexus (http\://maven.yiyaowang.com/nexus/content/groups/public/)\: Connect to maven.yiyaowang.com\:80 [maven.yiyaowang.com/172.16.1.68] failed\: Operation timed out (Connection timed out)

@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Jan 04 15:56:05 CST 2022
+spring-aop-5.2.15.RELEASE.jar>central=
+spring-aop-5.2.15.RELEASE.pom>central=
+spring-aop-5.2.15.RELEASE.pom>nexus=

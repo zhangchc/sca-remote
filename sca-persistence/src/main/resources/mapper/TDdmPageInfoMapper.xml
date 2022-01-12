@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmPageInfoMapper">
+
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmPageInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="app_id" jdbcType="BIGINT" property="appId" />
+    <result column="page_name" jdbcType="VARCHAR" property="pageName" />
+    <result column="page_icon" jdbcType="VARCHAR" property="pageIcon" />
+    <result column="page_desc" jdbcType="VARCHAR" property="pageDesc" />
+    <result column="range_type" jdbcType="INTEGER" property="rangeType" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, enterprise_id, app_id, page_name, page_icon, page_desc, range_type, create_user, create_time,
+    update_user, update_time, is_deleted
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_page_info
+    where id = #{pageId,jdbcType=BIGINT} and enterprise_id = #{enterpriseId,jdbcType=BIGINT} and is_deleted=0
+  </select>
+  <select id="searchByEnterpriseIdAndAppId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_page_info
+    where enterprise_id = #{enterpriseId,jdbcType=BIGINT} and app_id = #{appId,jdbcType=BIGINT} and is_deleted=0
+  </select>
+
+  <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmPageInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_page_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="pageName != null">
+        page_name,
+      </if>
+      <if test="pageIcon != null">
+        page_icon,
+      </if>
+      <if test="pageDesc != null">
+        page_desc,
+      </if>
+      <if test="rangeType != null">
+        range_type,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="pageName != null">
+        #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageIcon != null">
+        #{pageIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="pageDesc != null">
+        #{pageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rangeType != null">
+        #{rangeType,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmPageInfo">
+    update t_ddm_page_info
+    <set>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="pageName != null">
+        page_name = #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageIcon != null">
+        page_icon = #{pageIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="pageDesc != null">
+        page_desc = #{pageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rangeType != null">
+        range_type = #{rangeType,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

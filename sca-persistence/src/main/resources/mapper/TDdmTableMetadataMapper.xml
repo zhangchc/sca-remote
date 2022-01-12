@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmTableMetadataMapper">
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmTableMetadata">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="meta_id" jdbcType="BIGINT" property="metaId" />
+    <result column="column_title" jdbcType="VARCHAR" property="columnTitle" />
+    <result column="column_uuid" jdbcType="VARCHAR" property="columnUuid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="column_type" jdbcType="VARCHAR" property="columnType" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meta_id, column_title, column_uuid, remark, column_type, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_ddm_table_metadata
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_ddm_table_metadata
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmTableMetadata">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_table_metadata (meta_id, column_title, column_uuid, 
+      remark, column_type, is_delete
+      )
+    values (#{metaId,jdbcType=BIGINT}, #{columnTitle,jdbcType=VARCHAR}, #{columnUuid,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmTableMetadata">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_table_metadata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="metaId != null">
+        meta_id,
+      </if>
+      <if test="columnTitle != null">
+        column_title,
+      </if>
+      <if test="columnUuid != null">
+        column_uuid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="columnType != null">
+        column_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="metaId != null">
+        #{metaId,jdbcType=BIGINT},
+      </if>
+      <if test="columnTitle != null">
+        #{columnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="columnUuid != null">
+        #{columnUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmTableMetadata">
+    update t_ddm_table_metadata
+    <set>
+      <if test="metaId != null">
+        meta_id = #{metaId,jdbcType=BIGINT},
+      </if>
+      <if test="columnTitle != null">
+        column_title = #{columnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="columnUuid != null">
+        column_uuid = #{columnUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        column_type = #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhang.sca.model.po.TDdmTableMetadata">
+    update t_ddm_table_metadata
+    set meta_id = #{metaId,jdbcType=BIGINT},
+      column_title = #{columnTitle,jdbcType=VARCHAR},
+      column_uuid = #{columnUuid,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      column_type = #{columnType,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    insert into t_ddm_table_metadata
+    (meta_id, column_title, column_uuid, remark, column_type)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.metaId,jdbcType=BIGINT}, #{item.columnTitle,jdbcType=VARCHAR}, #{item.columnUuid,jdbcType=VARCHAR}, 
+        #{item.remark,jdbcType=VARCHAR}, #{item.columnType,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <select id="selectTableMetadataByMetaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_table_metadata
+    where meta_id = #{metaId,jdbcType=BIGINT} and is_delete = 0
+  </select>
+  <update id="deleteTableMetaByMetaId" parameterType="com.zhang.sca.model.po.TDdmTableMetadata">
+    update t_ddm_table_metadata
+    set is_delete = 1
+    where meta_id = #{metaId,jdbcType=BIGINT}
+  </update>
+</mapper>

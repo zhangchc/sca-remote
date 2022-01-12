@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmResourceRelMapper">
+
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmResourceRel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="resource_id" jdbcType="BIGINT" property="resourceId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="resource_type" jdbcType="TINYINT" property="resourceType" />
+    <result column="belong_id" jdbcType="BIGINT" property="belongId" />
+    <result column="belong_type" jdbcType="TINYINT" property="belongType" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, resource_id, enterprise_id, resource_type, belong_id, belong_type,
+    create_user, create_time, update_user, update_time, is_deleted
+  </sql>
+
+  <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmResourceRel">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_resource_rel (resource_id, enterprise_id, resource_type, 
+      belong_id, belong_type,
+      create_user, create_time, update_user, 
+      update_time, is_deleted)
+    values (#{resourceId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{resourceType,jdbcType=TINYINT}, 
+      #{belongId,jdbcType=BIGINT}, #{belongType,jdbcType=TINYINT},
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmResourceRel">
+    update t_ddm_resource_rel
+    <set>
+      <if test="resourceId != null">
+        resource_id = #{resourceId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceType != null">
+        resource_type = #{resourceType,jdbcType=TINYINT},
+      </if>
+      <if test="belongId != null">
+        belong_id = #{belongId,jdbcType=BIGINT},
+      </if>
+      <if test="belongType != null">
+        belong_type = #{belongType,jdbcType=TINYINT},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      update_time = CURRENT_TIMESTAMP
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    insert into t_ddm_resource_rel
+    (resource_id, enterprise_id, resource_type, belong_id, belong_type,
+      create_user, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.resourceId,jdbcType=BIGINT}, #{item.enterpriseId,jdbcType=BIGINT}, #{item.resourceType,jdbcType=TINYINT}, 
+        #{item.belongId,jdbcType=BIGINT}, #{item.belongType,jdbcType=TINYINT},
+        #{item.createUser,jdbcType=BIGINT}, CURRENT_TIMESTAMP)
+    </foreach>
+  </insert>
+
+</mapper>

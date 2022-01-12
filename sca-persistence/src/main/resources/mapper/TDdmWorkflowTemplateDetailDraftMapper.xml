@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.sca.mapper.TDdmWorkflowTemplateDetailDraftMapper">
+  <resultMap id="BaseResultMap" type="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="work_flow_temp_id" jdbcType="BIGINT" property="workFlowTempId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="node_approve" jdbcType="VARCHAR" property="nodeApprove" />
+    <result column="buss_type" jdbcType="TINYINT" property="bussType" />
+    <result column="node_type" jdbcType="TINYINT" property="nodeType" />
+    <result column="node_name" jdbcType="VARCHAR" property="nodeName" />
+    <result column="node_expr" jdbcType="VARCHAR" property="nodeExpr" />
+    <result column="approve_type" jdbcType="TINYINT" property="approveType" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, work_flow_temp_id, enterprise_id, parent_id, node_approve, buss_type, node_type, node_name,
+    node_expr, approve_type, create_user, create_time, update_user, update_time,
+    is_deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_workflow_template_detail_draft
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKeyAndEnterpriseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_workflow_template_detail_draft
+    where id = #{id,jdbcType=BIGINT}
+    and enterprise_id = #{enterpriseId, jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_workflow_template_detail_draft (work_flow_temp_id, enterprise_id, parent_id, node_approve,
+      buss_type, node_type, node_name,
+      node_expr, approve_type, create_user,
+      create_time, update_user, update_time,
+      is_deleted)
+    values (#{workFlowTempId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{parentId,jdbcType=VARCHAR}, #{nodeApprove,jdbcType=VARCHAR},
+      #{bussType,jdbcType=TINYINT}, #{nodeType,jdbcType=TINYINT}, #{nodeName,jdbcType=VARCHAR},
+      #{nodeExpr,jdbcType=VARCHAR}, #{approveType,jdbcType=TINYINT}, #{createUser,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+      #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ddm_workflow_template_detail_draft
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workFlowTempId != null">
+        work_flow_temp_id,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="nodeApprove != null">
+        node_approve,
+      </if>
+      <if test="bussType != null">
+        buss_type,
+      </if>
+      <if test="nodeType != null">
+        node_type,
+      </if>
+      <if test="nodeName != null">
+        node_name,
+      </if>
+      <if test="nodeExpr != null">
+        node_expr,
+      </if>
+      <if test="approveType != null">
+        approve_type,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workFlowTempId != null">
+        #{workFlowTempId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeApprove != null">
+        #{nodeApprove,jdbcType=VARCHAR},
+      </if>
+      <if test="bussType != null">
+        #{bussType,jdbcType=TINYINT},
+      </if>
+      <if test="nodeType != null">
+        #{nodeType,jdbcType=TINYINT},
+      </if>
+      <if test="nodeName != null">
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeExpr != null">
+        #{nodeExpr,jdbcType=VARCHAR},
+      </if>
+      <if test="approveType != null">
+        #{approveType,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    update t_ddm_workflow_template_detail_draft
+    <set>
+      <if test="workFlowTempId != null">
+        work_flow_temp_id = #{workFlowTempId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeApprove != null">
+        node_approve = #{nodeApprove,jdbcType=VARCHAR},
+      </if>
+      <if test="bussType != null">
+        buss_type = #{bussType,jdbcType=TINYINT},
+      </if>
+      <if test="nodeType != null">
+        node_type = #{nodeType,jdbcType=TINYINT},
+      </if>
+      <if test="nodeName != null">
+        node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeExpr != null">
+        node_expr = #{nodeExpr,jdbcType=VARCHAR},
+      </if>
+      <if test="approveType != null">
+        approve_type = #{approveType,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    update t_ddm_workflow_template_detail_draft
+    set work_flow_temp_id = #{workFlowTempId,jdbcType=BIGINT},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      node_approve = #{nodeApprove,jdbcType=VARCHAR},
+      buss_type = #{bussType,jdbcType=TINYINT},
+      node_type = #{nodeType,jdbcType=TINYINT},
+      node_name = #{nodeName,jdbcType=VARCHAR},
+      node_expr = #{nodeExpr,jdbcType=VARCHAR},
+      approve_type = #{approveType,jdbcType=TINYINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    insert into t_ddm_workflow_template_detail_draft
+    (work_flow_temp_id, enterprise_id, parent_id, node_approve, buss_type, node_type, node_name, node_expr,
+      approve_type, create_user, create_time, update_user, update_time,
+      is_deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.workFlowTempId,jdbcType=BIGINT}, #{item.enterpriseId,jdbcType=BIGINT}, #{item.parentId,jdbcType=VARCHAR}, #{item.nodeApprove,jdbcType=VARCHAR},
+        #{item.bussType,jdbcType=TINYINT}, #{item.nodeType,jdbcType=TINYINT}, #{item.nodeName,jdbcType=VARCHAR},
+        #{item.nodeExpr,jdbcType=VARCHAR}, #{item.approveType,jdbcType=TINYINT}, #{item.createUser,jdbcType=BIGINT},
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP},
+        0)
+    </foreach>
+  </insert>
+  <select id="selectByWorkFlowTempId" resultType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        t_ddm_workflow_template_detail_draft
+    WHERE
+        work_flow_temp_id = #{WorkFlowTempId,jdbcType=BIGINT}
+    AND is_deleted = 0
+  </select>
+
+  <select id="selectByWorkFlowTempIdAndEnterpriseId" resultType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    t_ddm_workflow_template_detail_draft
+    WHERE
+    work_flow_temp_id = #{WorkFlowTempId,jdbcType=BIGINT}
+    and enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    AND is_deleted = 0
+  </select>
+  <select id="selectByParentIdAndEnterpriseId"
+          resultType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    t_ddm_workflow_template_detail_draft
+    WHERE
+    parent_id = #{parentId}
+    AND enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    AND is_deleted = 0
+  </select>
+  <select id="selectFirstByTemplateIdAndEnterpriseId"
+          resultType="com.zhang.sca.model.po.TDdmWorkflowTemplateDetailDraft">
+    select
+    <include refid="Base_Column_List" />
+    from t_ddm_workflow_template_detail_draft
+    where parent_id = 0 and is_deleted=0 and work_flow_temp_id=#{workFlowTempId,jdbcType=BIGINT} and enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    limit 1
+  </select>
+</mapper>

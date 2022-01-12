@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Jan 04 15:55:58 CST 2022
+maven-plugin-registry-2.0.6.jar>nexus=
+maven-plugin-registry-2.0.6.jar>central=
+maven-plugin-registry-2.0.6.pom>central=
+maven-plugin-registry-2.0.6.pom>nexus=
