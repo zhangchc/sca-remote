@@ -5,6 +5,19 @@ spring:
     nacos:
       config:
         server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        extension-configs[0]:
+          data-id: order-service-dev.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        extension-configs[1]:
+          data-id: config-dev.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        extension-configs[2]:
+          data-id: redis.yaml
+          group: DEFAULT_GROUP
+          refresh: true
   profiles:
     active: dev
 

@@ -22,7 +22,9 @@ public class ApplicationRemoteStart {
         ConfigurableApplicationContext applicationContext= SpringApplication.run(ApplicationRemoteStart.class, args);
         String userName =applicationContext.getEnvironment().getProperty("user.name");
         String age =applicationContext.getEnvironment().getProperty("user.age");
-        System.out.println("======nocos config :"+userName+",age="+age);        log.info("sca-remote start success!");
+        String address =applicationContext.getEnvironment().getProperty("user.address");
+        System.out.println("======nocos config :"+userName+",age="+age+"address="+address);
+        log.info("sca-remote start success!");
     }
 
 }
