@@ -1,8 +1,5 @@
-import com.alibaba.fastjson.JSONObject;
-import com.zhang.sca.facade.api.UserService;
+import com.zhang.sca.facade.api.UserInfoService;
 import com.zhang.sca.facade.model.dto.UserInfoRequest;
-import com.zhang.sca.model.po.User;
-import org.apache.http.client.HttpClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -10,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 
 class UserServiceTest extends AbstractServiceTest{
 @Autowired
-private UserService userService;
+private UserInfoService userService;
 
 
     @Test
