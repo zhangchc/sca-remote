@@ -6,12 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 
 class UserServiceTest extends AbstractServiceTest{
 @Autowired
-private UserInfoService userService;
+private UserInfoService userInfoService;
 
 
     @Test
@@ -20,11 +19,11 @@ private UserInfoService userService;
         user.setPageNo(1);
         user.setPageSize(10);
         user.setGender("男");
-       userService.selectUserInfoBycon(user);
+        userInfoService.selectUserInfoBycon(user);
     }
 
     @Before
-    public void setup() throws IOException, URISyntaxException {
+    public void setup() throws IOException {
     }
 
     @After

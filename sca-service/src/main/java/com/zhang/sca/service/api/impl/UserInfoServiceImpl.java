@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     @Resource
-    private UserInfoMapper userMapper;
+    private UserInfoMapper userInfoMapper;
     @Autowired
     private MapperFacade mapperFacade;
 
@@ -35,7 +35,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         try {
             UserInfo user = mapperFacade.map(userRequest, UserInfo.class);
             PageHelper.startPage(Math.max(userRequest.getPageNo(),1),Math.min(userRequest.getPageSize(),100));
-            List<UserInfo> userList = userMapper.selectUserInfoBycon(user);
+            List<UserInfo> userList = userInfoMapper.selectUserInfoBycon(user);
             PageInfo<UserInfo> pageInfo=new PageInfo(userList);
             List<UserInfoResponse> userResponse=mapperFacade.mapAsList(userList,UserInfoResponse.class);
             resultDto=new PageInfo<>(userResponse);

@@ -23,7 +23,7 @@ import java.util.Objects;
 @RefreshScope
 public class UserInfoController {
     @Autowired
-    private UserInfoService userService;
+    private UserInfoService userInfoService;
 
 //    @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
 //    public LegoPageResponseInfo getUserInfo(@RequestBody UserInfoRequest userInfoRequest) {
@@ -52,7 +52,7 @@ public class UserInfoController {
                 log.error("入参对象为null");
                 return LegoPageResponseInfo.paramError(BizErrorCode.ARUGMENT_ERROR.getMessage());
             }
-            PageInfo<UserInfoResponse> pageInfo = userService.selectUserInfoBycon(userInfoRequest);
+            PageInfo<UserInfoResponse> pageInfo = userInfoService.selectUserInfoBycon(userInfoRequest);
             Long total = pageInfo.getTotal();
             result = LegoPageResponseInfo.success(pageInfo.getList(), total.intValue());
         } catch (Exception e) {
