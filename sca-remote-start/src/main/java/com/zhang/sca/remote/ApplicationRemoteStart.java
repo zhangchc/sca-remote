@@ -23,7 +23,7 @@ public class ApplicationRemoteStart {
         String userName =applicationContext.getEnvironment().getProperty("user.name");
         String age =applicationContext.getEnvironment().getProperty("user.age");
         String address =applicationContext.getEnvironment().getProperty("user.address");
-        System.out.println("======nocos config :"+userName+",age="+age+"address="+address);
+        log.info("======nocos config :"+userName+",age="+age+"address="+address);
         log.info("sca-remote start success!");
     }
 

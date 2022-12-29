@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 @Data
-public class UserDTO implements Serializable {
+public class UserInfoDTO implements Serializable {
     private Long userId;
 
     private Long deptId;
