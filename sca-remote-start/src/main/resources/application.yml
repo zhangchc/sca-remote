@@ -1,6 +1,4 @@
 server:
   port: 8012
-#spring:
-#  application:
-#    name: sca-remote
+
 
