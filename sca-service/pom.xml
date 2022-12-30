@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sca</artifactId>
-        <groupId>org.zhang</groupId>
+        <groupId>org.phoenix</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,26 +13,26 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.zhang</groupId>
+            <groupId>org.phoenix</groupId>
             <artifactId>sca-facade</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.zhang</groupId>
+            <groupId>org.phoenix</groupId>
             <artifactId>sca-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.zhang</groupId>
+            <groupId>org.phoenix</groupId>
             <artifactId>sca-integration</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.zhang</groupId>
+            <groupId>org.phoenix</groupId>
             <artifactId>sca-persistence</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

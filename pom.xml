@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>org.zhang</groupId>
+    <groupId>org.phoenix</groupId>
     <artifactId>sca</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
@@ -31,32 +31,32 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.zhang</groupId>
+                <groupId>org.phoenix</groupId>
                 <artifactId>sca-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.zhang</groupId>
+                <groupId>org.phoenix</groupId>
                 <artifactId>sca-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.zhang</groupId>
+                <groupId>org.phoenix</groupId>
                 <artifactId>sca-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.zhang</groupId>
+                <groupId>org.phoenix</groupId>
                 <artifactId>sca-integration</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <!-- 数据库begin -->
             <dependency>
-                <groupId>org.zhang</groupId>
+                <groupId>org.phoenix</groupId>
                 <artifactId>sca-persistence</artifactId>
                 <version>${project.version}</version>
             </dependency>

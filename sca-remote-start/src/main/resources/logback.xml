@@ -24,7 +24,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.zhang.sca.mapper" level="DEBUG"/>
+    <logger name="com.phoenix.sca.mapper" level="DEBUG"/>
 
     <!-- 定义logger -->
     <root level="info">
