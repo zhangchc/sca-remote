@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @param <T>
  */
 @Data
-public class LegoPageResponseData<T> implements Serializable {
+public class PageResponseData<T> implements Serializable {
     /**
      * data
      */

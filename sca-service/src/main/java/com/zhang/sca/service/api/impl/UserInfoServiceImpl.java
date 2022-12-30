@@ -2,7 +2,7 @@ package com.zhang.sca.service.api.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zhang.sca.common.exception.ErrorCode;
+import com.zhang.sca.common.exception.BizErrorCode;
 import com.zhang.sca.common.exception.ServiceException;
 import com.zhang.sca.facade.api.UserInfoService;
 import com.zhang.sca.facade.model.dto.UserInfoRequest;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+
 @Slf4j
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -26,25 +27,45 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 分页查询
+     *
      * @param userRequest
      * @return
      */
     @Override
-   public PageInfo<UserInfoResponse> selectUserInfoBycon(UserInfoRequest userRequest){
+    public PageInfo<UserInfoResponse> selectUserInfoBycon(UserInfoRequest userRequest) {
         PageInfo<UserInfoResponse> resultDto;
         try {
             UserInfo user = mapperFacade.map(userRequest, UserInfo.class);
-            PageHelper.startPage(Math.max(userRequest.getPageNo(),1),Math.min(userRequest.getPageSize(),100));
+            PageHelper.startPage(Math.max(userRequest.getPageNo(), 1), Math.min(userRequest.getPageSize(), 100));
             List<UserInfo> userList = userInfoMapper.selectUserInfoBycon(user);
-            PageInfo<UserInfo> pageInfo=new PageInfo(userList);
-            List<UserInfoResponse> userResponse=mapperFacade.mapAsList(userList,UserInfoResponse.class);
-            resultDto=new PageInfo<>(userResponse);
+            PageInfo<UserInfo> pageInfo = new PageInfo(userList);
+            List<UserInfoResponse> userResponse = mapperFacade.mapAsList(userList, UserInfoResponse.class);
+            resultDto = new PageInfo<>(userResponse);
             resultDto.setTotal(pageInfo.getTotal());
 
         } catch (Exception e) {
-            log.error("用户信息查询失败",e);
-            throw new ServiceException(ErrorCode.SYSTEM_ERROR_CODE.getCode(), "service层 用户信息列表查询异常");
+            log.error("用户列表查询失败", e);
+            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "用户列表查询失败");
         }
         return resultDto;
-   }
+    }
+
+    /**
+     * 获取用户基本信息
+     *
+     * @param userRequest
+     * @return
+     */
+    public UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest) {
+        UserInfoResponse response = null;
+        try {
+            Long userId = userRequest.getUserId();
+            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
+            response = mapperFacade.map(userInfo, UserInfoResponse.class);
+        } catch (Exception e) {
+            log.error("根据id获取用户信息失败", e);
+            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "根据id获取用户信息失败");
+        }
+        return response;
+    }
 }

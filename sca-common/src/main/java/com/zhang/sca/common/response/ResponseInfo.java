@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @param <T>
- * @author wangyuanchun
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

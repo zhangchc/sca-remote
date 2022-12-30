@@ -6,5 +6,8 @@ import com.zhang.sca.facade.model.dto.UserInfoResponse;
 
 public interface UserInfoService {
 
-   PageInfo<UserInfoResponse> selectUserInfoBycon(UserInfoRequest user);
+    PageInfo<UserInfoResponse> selectUserInfoBycon(UserInfoRequest user);
+
+    UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest);
+
 }

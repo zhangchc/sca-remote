@@ -11,7 +11,6 @@ public class ServiceException extends RuntimeException {
     private String message;
 
     public ServiceException() {
-
     }
 
     public ServiceException(String code, String message, Throwable cause) {
@@ -25,25 +24,6 @@ public class ServiceException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
-
-    public ServiceException(ExceptionCodeType exceptionCodeType, Throwable cause) {
-        super(exceptionCodeType.getCode() + ":" + exceptionCodeType.getMessage(), cause);
-        this.code = exceptionCodeType.getCode();
-        this.message = exceptionCodeType.getMessage();
-    }
-
-    public ServiceException(ExceptionCodeType exceptionCodeType) {
-        super(exceptionCodeType.getCode() + ":" + exceptionCodeType.getMessage());
-        this.code = exceptionCodeType.getCode();
-        this.message = exceptionCodeType.getMessage();
-    }
-
-    public ServiceException(ExceptionCodeType exceptionCodeType, String msg) {
-        super(exceptionCodeType.getCode() + ":" + msg);
-        this.code = exceptionCodeType.getCode();
-        this.message = msg;
-    }
-
     public String getCode() {
         return this.code;
     }

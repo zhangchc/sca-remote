@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 描述:
+ * 描述:接口输入类
  *
  * @author zhangchuancun
  * @date 2022/12/28 15:45
