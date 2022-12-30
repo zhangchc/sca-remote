@@ -24,11 +24,7 @@
             <groupId>org.phoenix</groupId>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
-        </dependency>
+
 
             <dependency>
                 <groupId>com.itfsw</groupId>
@@ -54,22 +50,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.mybatis.generator</groupId>-->
-<!--                <artifactId>mybatis-generator-maven-plugin</artifactId>-->
-<!--                <version>1.4.0</version>-->
-<!--                <configuration>-->
-<!--                    <overwrite>true</overwrite>-->
-<!--                </configuration>-->
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>mysql</groupId>-->
-<!--                        <artifactId>mysql-connector-java</artifactId>-->
-<!--                        <version>5.1.46</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--            </plugin>-->
-
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
