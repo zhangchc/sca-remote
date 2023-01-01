@@ -35,32 +35,26 @@
                 <artifactId>sca-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.phoenix</groupId>
                 <artifactId>sca-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.phoenix</groupId>
                 <artifactId>sca-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.phoenix</groupId>
                 <artifactId>sca-integration</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-            <!-- 数据库begin -->
             <dependency>
                 <groupId>org.phoenix</groupId>
                 <artifactId>sca-persistence</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- 数据库end-->
 
             <!-- mybatis pagehelper 分页插件-->
             <dependency>
@@ -102,16 +96,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -121,18 +109,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.83</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.3.0</version>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
