@@ -66,4 +66,23 @@ public class UserInfoController {
         }
         return result;
     }
+
+    /**
+     * 新增用户信息
+     * @param userInfoRequest
+     */
+    @RequestMapping(value="/saveUserInfo",method=RequestMethod.POST)
+    public  ResponseInfo saveUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+        userInfoService.saveUserInfo(userInfoRequest);
+        return ResponseInfo.build(1,"新增用户信息成功！",null);
+    }
+
+    /**
+     * 更新用户信息
+     * @param userInfoRequest
+     */
+    @RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
+    public void updateUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+
+    }
 }

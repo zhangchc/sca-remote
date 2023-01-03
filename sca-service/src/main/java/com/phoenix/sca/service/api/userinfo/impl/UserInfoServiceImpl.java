@@ -1,5 +1,6 @@
 package com.phoenix.sca.service.api.userinfo.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.phoenix.sca.common.exception.BizErrorCode;
@@ -67,5 +68,18 @@ public class UserInfoServiceImpl implements UserInfoService {
             throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "根据id获取用户信息失败");
         }
         return response;
+    }
+
+    public Boolean saveUserInfo(UserInfoRequest userRequest) {
+        log.info("保存用户信息-userRequest:{}", JSONObject.toJSONString(userRequest));
+        int count = 0;
+        try {
+            UserInfo userInfo = mapperFacade.map(userRequest, UserInfo.class);
+            count = userInfoMapper.insert(userInfo);
+        } catch (Exception e) {
+            log.error("保存用户信息失败", e);
+            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "保存用户信息失败");
+        }
+        return count > 0;
     }
 }

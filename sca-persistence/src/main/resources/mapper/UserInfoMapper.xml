@@ -43,18 +43,21 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.phoenix.sca.entity.userinfo.UserInfo">
-    insert into sys_user (user_id, dept_id, username, 
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user ( dept_id, username,
       nick_name, gender, phone, 
       email, avatar_name, avatar_path, 
       password, is_admin, enabled, 
       create_by, update_by, pwd_reset_time, 
       create_time, update_time)
-    values (#{userId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+    values ( #{deptId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
       #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{avatarName,jdbcType=VARCHAR}, #{avatarPath,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{isAdmin,jdbcType=BIT}, #{enabled,jdbcType=BIGINT}, 
       #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{pwdResetTime,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.phoenix.sca.entity.userinfo.UserInfo">
     insert into sys_user

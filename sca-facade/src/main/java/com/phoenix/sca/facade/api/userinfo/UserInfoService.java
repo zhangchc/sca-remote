@@ -10,4 +10,7 @@ public interface UserInfoService {
 
     UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest);
 
+    Boolean saveUserInfo(UserInfoRequest userRequest);
+
+
 }
