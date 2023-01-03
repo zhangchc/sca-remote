@@ -1,14 +1,14 @@
-package com.phoenix.sca.service.api.impl;
+package com.phoenix.sca.service.api.userinfo.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.phoenix.sca.common.exception.BizErrorCode;
 import com.phoenix.sca.common.exception.ServiceException;
-import com.phoenix.sca.facade.api.UserInfoService;
-import com.phoenix.sca.facade.model.dto.UserInfoRequest;
-import com.phoenix.sca.facade.model.dto.UserInfoResponse;
-import com.phoenix.sca.mapper.UserInfoMapper;
-import com.phoenix.sca.entity.UserInfo;
+import com.phoenix.sca.facade.api.userinfo.UserInfoService;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
+import com.phoenix.sca.mapper.userinfo.UserInfoMapper;
+import com.phoenix.sca.entity.userinfo.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;

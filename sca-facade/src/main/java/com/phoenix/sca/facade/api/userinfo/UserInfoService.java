@@ -1,8 +1,8 @@
-package com.phoenix.sca.facade.api;
+package com.phoenix.sca.facade.api.userinfo;
 
 import com.github.pagehelper.PageInfo;
-import com.phoenix.sca.facade.model.dto.UserInfoRequest;
-import com.phoenix.sca.facade.model.dto.UserInfoResponse;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 
 public interface UserInfoService {
 

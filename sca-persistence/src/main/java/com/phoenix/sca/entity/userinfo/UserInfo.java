@@ -1,4 +1,4 @@
-package com.phoenix.sca.entity;
+package com.phoenix.sca.entity.userinfo;
 
 import lombok.Data;
 

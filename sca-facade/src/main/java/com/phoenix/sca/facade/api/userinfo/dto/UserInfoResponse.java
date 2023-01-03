@@ -1,4 +1,4 @@
-package com.phoenix.sca.facade.model.dto;
+package com.phoenix.sca.facade.api.userinfo.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;

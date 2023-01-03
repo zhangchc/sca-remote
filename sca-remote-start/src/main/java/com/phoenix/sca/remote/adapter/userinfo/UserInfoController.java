@@ -1,13 +1,13 @@
-package com.phoenix.sca.remote.adapter;
+package com.phoenix.sca.remote.adapter.userinfo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.phoenix.sca.common.exception.BizErrorCode;
 import com.phoenix.sca.common.response.PageResponseInfo;
 import com.phoenix.sca.common.response.ResponseInfo;
-import com.phoenix.sca.facade.api.UserInfoService;
-import com.phoenix.sca.facade.model.dto.UserInfoRequest;
-import com.phoenix.sca.facade.model.dto.UserInfoResponse;
+import com.phoenix.sca.facade.api.userinfo.UserInfoService;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

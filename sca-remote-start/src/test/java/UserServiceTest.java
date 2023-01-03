@@ -1,5 +1,5 @@
-import com.phoenix.sca.facade.api.UserInfoService;
-import com.phoenix.sca.facade.model.dto.UserInfoRequest;
+import com.phoenix.sca.facade.api.userinfo.UserInfoService;
+import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

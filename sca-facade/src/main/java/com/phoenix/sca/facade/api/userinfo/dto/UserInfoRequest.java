@@ -1,4 +1,4 @@
-package com.phoenix.sca.facade.model.dto;
+package com.phoenix.sca.facade.api.userinfo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
