@@ -1,6 +1,6 @@
 package com.phoenix.sca.mapper;
 
-import com.phoenix.sca.model.po.UserInfo;
+import com.phoenix.sca.entity.UserInfo;
 
 import java.util.List;
 

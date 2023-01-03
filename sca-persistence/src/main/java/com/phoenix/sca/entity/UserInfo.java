@@ -1,4 +1,4 @@
-package com.phoenix.sca.model.po;
+package com.phoenix.sca.entity;
 
 import lombok.Data;
 

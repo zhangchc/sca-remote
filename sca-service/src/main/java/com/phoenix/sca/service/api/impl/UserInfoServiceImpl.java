@@ -8,7 +8,7 @@ import com.phoenix.sca.facade.api.UserInfoService;
 import com.phoenix.sca.facade.model.dto.UserInfoRequest;
 import com.phoenix.sca.facade.model.dto.UserInfoResponse;
 import com.phoenix.sca.mapper.UserInfoMapper;
-import com.phoenix.sca.model.po.UserInfo;
+import com.phoenix.sca.entity.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
