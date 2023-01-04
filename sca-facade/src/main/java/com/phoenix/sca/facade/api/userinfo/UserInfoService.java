@@ -12,5 +12,7 @@ public interface UserInfoService {
 
     Boolean saveUserInfo(UserInfoRequest userRequest);
 
+    Boolean updateUserInfoByUserId(UserInfoRequest userRequest);
+
 
 }

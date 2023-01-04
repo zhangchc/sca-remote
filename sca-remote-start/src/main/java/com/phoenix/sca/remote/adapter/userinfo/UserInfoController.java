@@ -82,7 +82,8 @@ public class UserInfoController {
      * @param userInfoRequest
      */
     @RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
-    public void updateUserInfo(@RequestBody UserInfoRequest userInfoRequest){
-
+    public ResponseInfo updateUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+        userInfoService.updateUserInfoByUserId(userInfoRequest);
+        return ResponseInfo.build(1,"更新用户信息成功！",null);
     }
 }

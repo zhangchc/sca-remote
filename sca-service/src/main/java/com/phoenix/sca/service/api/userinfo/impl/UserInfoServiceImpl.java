@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -79,6 +80,21 @@ public class UserInfoServiceImpl implements UserInfoService {
         } catch (Exception e) {
             log.error("保存用户信息失败", e);
             throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "保存用户信息失败");
+        }
+        return count > 0;
+    }
+
+    public Boolean updateUserInfoByUserId(UserInfoRequest userRequest) {
+        log.info("保存用户信息-userRequest:{}", JSONObject.toJSONString(userRequest));
+        int count = 0;
+        try {
+            UserInfo userInfo = mapperFacade.map(userRequest, UserInfo.class);
+            userInfo.setUpdateTime(new Date());
+            userInfo.setUpdateBy("admin");
+            count = userInfoMapper.updateByPrimaryKey(userInfo);
+        } catch (Exception e) {
+            log.error("更新用户信息失败", e);
+            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "更新用户信息失败");
         }
         return count > 0;
     }
