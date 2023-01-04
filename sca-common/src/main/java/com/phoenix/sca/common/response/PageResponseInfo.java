@@ -10,7 +10,7 @@ public class PageResponseInfo<T> implements Serializable {
     /**
      * 状态码
      */
-    private Integer ret;
+    private String ret;
     /**
      * 返回信息
      */
@@ -23,13 +23,13 @@ public class PageResponseInfo<T> implements Serializable {
     public PageResponseInfo() {
     }
 
-    public PageResponseInfo(Integer ret, String msg, T data) {
+    public PageResponseInfo(String ret, String msg, T data) {
         this.ret = ret;
         this.msg = msg;
         this.data.setResult(data);
     }
 
-    public PageResponseInfo(Integer ret, String msg, T data, Integer total) {
+    public PageResponseInfo(String ret, String msg, T data, Integer total) {
         this.ret = ret;
         this.msg = msg;
         this.data.setResult(data);
@@ -37,31 +37,31 @@ public class PageResponseInfo<T> implements Serializable {
     }
 
     public static <T> PageResponseInfo<T> success(T data, Integer total) {
-        return new PageResponseInfo<>(1, "success", data, total);
+        return new PageResponseInfo<>("1", "success", data, total);
     }
 
 
     public static <T> PageResponseInfo<T> success() {
-        return new PageResponseInfo<>(1, "success", null);
+        return new PageResponseInfo<>("1", "success", null);
     }
 
     public static <T> PageResponseInfo<T> paramError(String msg) {
-        return new PageResponseInfo<>(BizResponseStatus.PARAM_ERROR_CODE, msg, null);
+        return new PageResponseInfo<>(ResponseCode.PARAM_ERROR_CODE.getCode(), msg, null);
     }
 
     public static <T> PageResponseInfo<T> paramError() {
-        return new PageResponseInfo<>(BizResponseStatus.PARAM_ERROR_CODE, "参数错误", null);
+        return new PageResponseInfo<>(ResponseCode.PARAM_ERROR_CODE.getCode(), "参数错误", null);
     }
 
     public static <T> PageResponseInfo<T> systemError(String msg) {
-        return new PageResponseInfo<>(BizResponseStatus.SYSTEM_ERROR_CODE, msg, null);
+        return new PageResponseInfo<>(ResponseCode.SYS_ERROR_CODE.getCode(), msg, null);
     }
 
     public static <T> PageResponseInfo<T> systemError() {
-        return new PageResponseInfo<>(BizResponseStatus.SYSTEM_ERROR_CODE, "系统错误", null);
+        return new PageResponseInfo<>(ResponseCode.SYS_ERROR_CODE.getCode(), "系统错误", null);
     }
 
-    public static <T> PageResponseInfo<T> build(int ret, String msg, T data) {
+    public static <T> PageResponseInfo<T> build(String ret, String msg, T data) {
         return new PageResponseInfo<>(ret, msg, data);
     }
 

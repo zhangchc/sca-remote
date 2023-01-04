@@ -3,13 +3,13 @@ package com.phoenix.sca.service.api.userinfo.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.phoenix.sca.common.exception.BizErrorCode;
 import com.phoenix.sca.common.exception.ServiceException;
+import com.phoenix.sca.common.response.ResponseCode;
+import com.phoenix.sca.entity.userinfo.UserInfo;
 import com.phoenix.sca.facade.api.userinfo.UserInfoService;
 import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
 import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 import com.phoenix.sca.mapper.userinfo.UserInfoMapper;
-import com.phoenix.sca.entity.userinfo.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +44,9 @@ public class UserInfoServiceImpl implements UserInfoService {
             List<UserInfoResponse> userResponse = mapperFacade.mapAsList(userList, UserInfoResponse.class);
             resultDto = new PageInfo<>(userResponse);
             resultDto.setTotal(pageInfo.getTotal());
-
         } catch (Exception e) {
             log.error("用户列表查询失败", e);
-            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "用户列表查询失败");
+            throw new ServiceException(ResponseCode.SYS_ERROR_CODE.getCode(), "用户列表查询失败");
         }
         return resultDto;
     }
@@ -66,7 +65,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             response = mapperFacade.map(userInfo, UserInfoResponse.class);
         } catch (Exception e) {
             log.error("根据id获取用户信息失败", e);
-            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "根据id获取用户信息失败");
+            throw new ServiceException(ResponseCode.SYS_ERROR_CODE.getCode(), "根据id获取用户信息失败");
         }
         return response;
     }
@@ -79,7 +78,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             count = userInfoMapper.insert(userInfo);
         } catch (Exception e) {
             log.error("保存用户信息失败", e);
-            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "保存用户信息失败");
+            throw new ServiceException(ResponseCode.SYS_ERROR_CODE.getCode(), "保存用户信息失败");
         }
         return count > 0;
     }
@@ -94,7 +93,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             count = userInfoMapper.updateByPrimaryKey(userInfo);
         } catch (Exception e) {
             log.error("更新用户信息失败", e);
-            throw new ServiceException(BizErrorCode.SYSTEM_ERROR_CODE.getCode(), "更新用户信息失败");
+            throw new ServiceException(ResponseCode.SYS_ERROR_CODE.getCode(), "更新用户信息失败");
         }
         return count > 0;
     }

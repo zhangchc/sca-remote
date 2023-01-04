@@ -2,9 +2,8 @@ package com.phoenix.sca.remote.adapter.userinfo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.phoenix.sca.common.exception.BizErrorCode;
-import com.phoenix.sca.common.response.BizResponseStatus;
 import com.phoenix.sca.common.response.PageResponseInfo;
+import com.phoenix.sca.common.response.ResponseCode;
 import com.phoenix.sca.common.response.ResponseInfo;
 import com.phoenix.sca.facade.api.userinfo.UserInfoService;
 import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
@@ -29,6 +28,7 @@ public class UserInfoController {
 
     /**
      * 根据id获取用户信息
+     *
      * @param userInfoRequest
      * @return
      */
@@ -36,7 +36,7 @@ public class UserInfoController {
     public ResponseInfo<UserInfoResponse> getUserInfo(@RequestBody UserInfoRequest userInfoRequest) {
         if (Objects.isNull(userInfoRequest.getUserId())) {
             log.error("参数为null");
-            return ResponseInfo.paramError(BizErrorCode.ARUGMENT_ERROR.getMessage());
+            return ResponseInfo.paramError(ResponseCode.PARAM_ERROR_CODE.getMessage());
         }
         log.info("查询用户信息 userId={}", JSONObject.toJSONString(userInfoRequest.getUserId()));
         UserInfoResponse userInfo = userInfoService.selectUserInfoByUserId(userInfoRequest);
@@ -52,39 +52,37 @@ public class UserInfoController {
     @RequestMapping(value = "/getUserInfoList", method = RequestMethod.POST)
     public PageResponseInfo getUserInfoList(@RequestBody UserInfoRequest userInfoRequest) {
         PageResponseInfo result;
-        try {
-            log.info("获取用户列表 入参：{}", JSONObject.toJSONString(userInfoRequest));
-            if (Objects.isNull(userInfoRequest)) {
-                log.error("入参对象为null");
-                return PageResponseInfo.paramError(BizErrorCode.ARUGMENT_ERROR.getMessage());
-            }
-            PageInfo<UserInfoResponse> pageInfo = userInfoService.selectUserInfoBycon(userInfoRequest);
-            Long total = pageInfo.getTotal();
-            result = PageResponseInfo.success(pageInfo.getList(), total.intValue());
-        } catch (Exception e) {
-            log.error("用户列表查询异常:", e);
-            return PageResponseInfo.systemError("用户列表查询异常");
+
+        log.info("获取用户列表 入参：{}", JSONObject.toJSONString(userInfoRequest));
+        if (Objects.isNull(userInfoRequest)) {
+            log.error("入参对象为null");
+            return PageResponseInfo.paramError(ResponseCode.PARAM_ERROR_CODE.getMessage());
         }
+        PageInfo<UserInfoResponse> pageInfo = userInfoService.selectUserInfoBycon(userInfoRequest);
+        Long total = pageInfo.getTotal();
+        result = PageResponseInfo.success(pageInfo.getList(), total.intValue());
         return result;
     }
 
     /**
      * 新增用户信息
+     *
      * @param userInfoRequest
      */
-    @RequestMapping(value="/saveUserInfo",method=RequestMethod.POST)
-    public  ResponseInfo saveUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+    @RequestMapping(value = "/saveUserInfo", method = RequestMethod.POST)
+    public ResponseInfo saveUserInfo(@RequestBody UserInfoRequest userInfoRequest) {
         userInfoService.saveUserInfo(userInfoRequest);
-        return ResponseInfo.build(BizResponseStatus.SUCCESS_CODE,"新增用户信息成功！",null);
+        return ResponseInfo.build(ResponseCode.SUCCESS_CODE.getCode(), "新增用户信息成功！", null);
     }
 
     /**
      * 更新用户信息
+     *
      * @param userInfoRequest
      */
-    @RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
-    public ResponseInfo updateUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+    public ResponseInfo updateUserInfo(@RequestBody UserInfoRequest userInfoRequest) {
         userInfoService.updateUserInfoByUserId(userInfoRequest);
-        return ResponseInfo.build(BizResponseStatus.SUCCESS_CODE,"更新用户信息成功！",null);
+        return ResponseInfo.build(ResponseCode.SUCCESS_CODE.getCode(), "更新用户信息成功！", null);
     }
 }
