@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-<!--    <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>-->
-
     <!-- 日志文件输出设置 -->
     <appender name="webapp" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>/var/logs/sca-remote.log</file>
@@ -11,16 +9,16 @@
             <maxFileSize>100MB</maxFileSize>
         </rollingPolicy>
         <encoder>
-            <charset>utf8</charset>
+            <charset>UTF-8</charset>
             <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %-5level %logger{1000}-%M:%L - %msg%n</pattern>
         </encoder>
-
     </appender>
 
     <!-- 控制台输出 （可选项） -->
-    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %-5level %logger{1000}-%M:%L - %msg%n</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -29,7 +27,7 @@
     <!-- 定义logger -->
     <root level="info">
         <!-- 控制台输出 （可选项） -->
-        <appender-ref ref="stdout"/>
+        <appender-ref ref="CONSOLE"/>
         <!-- 日志文件输出 -->
         <appender-ref ref="webapp"/>
     </root>

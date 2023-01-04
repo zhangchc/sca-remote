@@ -54,11 +54,11 @@ public class PageResponseInfo<T> implements Serializable {
     }
 
     public static <T> PageResponseInfo<T> systemError(String msg) {
-        return new PageResponseInfo<>(BizResponseStatus.PARAM_ERROR_CODE, msg, null);
+        return new PageResponseInfo<>(BizResponseStatus.SYSTEM_ERROR_CODE, msg, null);
     }
 
     public static <T> PageResponseInfo<T> systemError() {
-        return new PageResponseInfo<>(BizResponseStatus.PARAM_ERROR_CODE, "系统错误", null);
+        return new PageResponseInfo<>(BizResponseStatus.SYSTEM_ERROR_CODE, "系统错误", null);
     }
 
     public static <T> PageResponseInfo<T> build(int ret, String msg, T data) {

@@ -3,6 +3,7 @@ package com.phoenix.sca.remote.adapter.userinfo;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.phoenix.sca.common.exception.BizErrorCode;
+import com.phoenix.sca.common.response.BizResponseStatus;
 import com.phoenix.sca.common.response.PageResponseInfo;
 import com.phoenix.sca.common.response.ResponseInfo;
 import com.phoenix.sca.facade.api.userinfo.UserInfoService;
@@ -74,7 +75,7 @@ public class UserInfoController {
     @RequestMapping(value="/saveUserInfo",method=RequestMethod.POST)
     public  ResponseInfo saveUserInfo(@RequestBody UserInfoRequest userInfoRequest){
         userInfoService.saveUserInfo(userInfoRequest);
-        return ResponseInfo.build(1,"新增用户信息成功！",null);
+        return ResponseInfo.build(BizResponseStatus.SUCCESS_CODE,"新增用户信息成功！",null);
     }
 
     /**
@@ -84,6 +85,6 @@ public class UserInfoController {
     @RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
     public ResponseInfo updateUserInfo(@RequestBody UserInfoRequest userInfoRequest){
         userInfoService.updateUserInfoByUserId(userInfoRequest);
-        return ResponseInfo.build(1,"更新用户信息成功！",null);
+        return ResponseInfo.build(BizResponseStatus.SUCCESS_CODE,"更新用户信息成功！",null);
     }
 }
