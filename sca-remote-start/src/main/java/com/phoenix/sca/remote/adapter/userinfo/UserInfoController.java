@@ -37,7 +37,7 @@ public class UserInfoController {
             log.error("参数为null");
             return ResponseInfo.paramError(BizErrorCode.ARUGMENT_ERROR.getMessage());
         }
-        log.info("======userId={}", JSONObject.toJSONString(userInfoRequest.getUserId()));
+        log.info("查询用户信息 userId={}", JSONObject.toJSONString(userInfoRequest.getUserId()));
         UserInfoResponse userInfo = userInfoService.selectUserInfoByUserId(userInfoRequest);
         return ResponseInfo.success(userInfo);
     }
@@ -52,7 +52,7 @@ public class UserInfoController {
     public PageResponseInfo getUserInfoList(@RequestBody UserInfoRequest userInfoRequest) {
         PageResponseInfo result;
         try {
-            log.info("获取用户列表 入参：", JSONObject.toJSONString(userInfoRequest));
+            log.info("获取用户列表 入参：{}", JSONObject.toJSONString(userInfoRequest));
             if (Objects.isNull(userInfoRequest)) {
                 log.error("入参对象为null");
                 return PageResponseInfo.paramError(BizErrorCode.ARUGMENT_ERROR.getMessage());
