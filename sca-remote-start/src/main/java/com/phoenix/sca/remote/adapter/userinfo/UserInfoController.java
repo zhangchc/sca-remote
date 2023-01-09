@@ -29,7 +29,7 @@ import java.util.Objects;
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
-    @Resource
+    @Autowired
     private CommonProperties commonProperties;
 
     //    @Value(value="${common.jwt.tokenHeader}")

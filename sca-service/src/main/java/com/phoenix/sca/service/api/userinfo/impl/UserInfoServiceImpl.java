@@ -14,10 +14,7 @@ import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 import com.phoenix.sca.mapper.userinfo.UserInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -28,9 +25,9 @@ import java.util.List;
 public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private UserInfoMapper userInfoMapper;
-    @Autowired
+    @Resource
     private MapperFacade mapperFacade;
-    @Autowired
+    @Resource
     private JwtTokenUtil jwtTokenUtil;
     @Resource
     private CommonProperties commonProperties;
