@@ -10,6 +10,8 @@ public interface UserInfoService {
 
     UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest);
 
+    UserInfoResponse login(UserInfoRequest userRequest);
+
     Boolean saveUserInfo(UserInfoRequest userRequest);
 
     Boolean updateUserInfoByUserId(UserInfoRequest userRequest);

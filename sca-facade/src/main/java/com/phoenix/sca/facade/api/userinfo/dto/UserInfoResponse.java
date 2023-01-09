@@ -18,6 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserInfoResponse implements Serializable {
+
     private Long userId;
 
     private Long deptId;
@@ -51,4 +52,6 @@ public class UserInfoResponse implements Serializable {
     private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    private String token;
 }

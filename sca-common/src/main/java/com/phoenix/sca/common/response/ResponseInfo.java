@@ -37,6 +37,9 @@ public class ResponseInfo<T> implements Serializable {
     public static <T> ResponseInfo<T> paramError(String msg) {
         return new ResponseInfo<>(ResponseCode.PARAM_ERROR_CODE.getCode(), msg, null);
     }
+    public static <T> ResponseInfo<T> paramError(String code ,String msg) {
+        return new ResponseInfo<>(code, msg, null);
+    }
 
     public static <T> ResponseInfo<T> paramError() {
         return new ResponseInfo<>(ResponseCode.PARAM_ERROR_CODE.getCode(), "参数错误", null);

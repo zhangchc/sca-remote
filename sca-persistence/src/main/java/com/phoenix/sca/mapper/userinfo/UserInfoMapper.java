@@ -13,6 +13,8 @@ public interface UserInfoMapper {
 
     UserInfo selectByPrimaryKey(Long userId);
 
+    UserInfo selectByUserNameAndPass(UserInfo record);
+
     List<UserInfo> selectUserInfoBycon(UserInfo record);
 
     int updateByPrimaryKeySelective(UserInfo record);

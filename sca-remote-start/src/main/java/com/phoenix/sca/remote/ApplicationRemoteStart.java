@@ -17,14 +17,13 @@ import org.springframework.context.annotation.Import;
 @MapperScan(basePackages = {"com.phoenix.sca.mapper"})
 @EnableDiscoveryClient
 @EnableFeignClients
+
 public class ApplicationRemoteStart {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext= SpringApplication.run(ApplicationRemoteStart.class, args);
-        String userName =applicationContext.getEnvironment().getProperty("user.name");
-        String age =applicationContext.getEnvironment().getProperty("user.age");
-        String address =applicationContext.getEnvironment().getProperty("user.address");
-        log.info("======nocos config :"+userName+",age="+age+"address="+address);
-        log.info("sca-remote start success!");
+        log.info("===============================");
+        log.info("===sca-remote start success!===");
+        log.info("===============================");
     }
 
 }

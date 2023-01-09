@@ -1,0 +1,13 @@
+1.集成mybatis gener ok
+2.全局统一异常 ok
+3.返回状态码 ok
+4.jwt token
+5.nacos配置项
+6.java 表达式
+7.rdis
+8.mq
+9.xxl-job
+10.分布式
+11.mybatis-plus
+12.文件上传下载
+13.excel处理
