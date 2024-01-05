@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Import;
 @MapperScan(basePackages = {"com.phoenix.sca.mapper"})
 @EnableDiscoveryClient
 @EnableFeignClients
-
 public class ApplicationRemoteStart {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext= SpringApplication.run(ApplicationRemoteStart.class, args);

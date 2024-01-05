@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phoenix.sca.mapper.pay.BusPayPreMapper">
+  <resultMap id="BaseResultMap" type="com.phoenix.sca.entity.pay.BusPayPre">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="pay_trade_no" jdbcType="VARCHAR" property="payTradeNo" />
+    <result column="out_pay_trade_no" jdbcType="VARCHAR" property="outPayTradeNo" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_status" jdbcType="INTEGER" property="payStatus" />
+    <result column="order_money" jdbcType="DECIMAL" property="orderMoney" />
+    <result column="request_data" jdbcType="VARCHAR" property="requestData" />
+    <result column="response_data" jdbcType="VARCHAR" property="responseData" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, order_no, pay_type, pay_trade_no, out_pay_trade_no, pay_time, pay_status, 
+    order_money, request_data, response_data, create_time, update_time, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.phoenix.sca.entity.pay.BusPayPreExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bus_pay_pre
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bus_pay_pre
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bus_pay_pre
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phoenix.sca.entity.pay.BusPayPreExample">
+    delete from bus_pay_pre
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phoenix.sca.entity.pay.BusPayPre">
+    insert into bus_pay_pre (id, user_id, order_no, 
+      pay_type, pay_trade_no, out_pay_trade_no, 
+      pay_time, pay_status, order_money, 
+      request_data, response_data, create_time, 
+      update_time, remark)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=INTEGER}, #{payTradeNo,jdbcType=VARCHAR}, #{outPayTradeNo,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payStatus,jdbcType=INTEGER}, #{orderMoney,jdbcType=DECIMAL}, 
+      #{requestData,jdbcType=VARCHAR}, #{responseData,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phoenix.sca.entity.pay.BusPayPre">
+    insert into bus_pay_pre
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="payTradeNo != null">
+        pay_trade_no,
+      </if>
+      <if test="outPayTradeNo != null">
+        out_pay_trade_no,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="orderMoney != null">
+        order_money,
+      </if>
+      <if test="requestData != null">
+        request_data,
+      </if>
+      <if test="responseData != null">
+        response_data,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payTradeNo != null">
+        #{payTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outPayTradeNo != null">
+        #{outPayTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null">
+        #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="requestData != null">
+        #{requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="responseData != null">
+        #{responseData,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phoenix.sca.entity.pay.BusPayPreExample" resultType="java.lang.Long">
+    select count(*) from bus_pay_pre
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bus_pay_pre
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payTradeNo != null">
+        pay_trade_no = #{record.payTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outPayTradeNo != null">
+        out_pay_trade_no = #{record.outPayTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payStatus != null">
+        pay_status = #{record.payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderMoney != null">
+        order_money = #{record.orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.requestData != null">
+        request_data = #{record.requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.responseData != null">
+        response_data = #{record.responseData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bus_pay_pre
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      pay_trade_no = #{record.payTradeNo,jdbcType=VARCHAR},
+      out_pay_trade_no = #{record.outPayTradeNo,jdbcType=VARCHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      pay_status = #{record.payStatus,jdbcType=INTEGER},
+      order_money = #{record.orderMoney,jdbcType=DECIMAL},
+      request_data = #{record.requestData,jdbcType=VARCHAR},
+      response_data = #{record.responseData,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phoenix.sca.entity.pay.BusPayPre">
+    update bus_pay_pre
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payTradeNo != null">
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outPayTradeNo != null">
+        out_pay_trade_no = #{outPayTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null">
+        order_money = #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="requestData != null">
+        request_data = #{requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="responseData != null">
+        response_data = #{responseData,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phoenix.sca.entity.pay.BusPayPre">
+    update bus_pay_pre
+    set user_id = #{userId,jdbcType=BIGINT},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+      out_pay_trade_no = #{outPayTradeNo,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      order_money = #{orderMoney,jdbcType=DECIMAL},
+      request_data = #{requestData,jdbcType=VARCHAR},
+      response_data = #{responseData,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

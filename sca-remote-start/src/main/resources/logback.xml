@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <!-- 定义彩色转换器 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
     <!-- 日志文件输出设置 -->
     <appender name="webapp" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>/var/logs/sca-remote.log</file>
@@ -10,7 +14,7 @@
         </rollingPolicy>
         <encoder>
             <charset>UTF-8</charset>
-            <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %-5level %logger{1000}-%M:%L - %msg%n</pattern>
+            <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %clr(%-5level) %logger{1000}-%M:%L - %msg%n</pattern>
         </encoder>
     </appender>
 

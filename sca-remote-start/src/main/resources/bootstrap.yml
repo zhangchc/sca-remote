@@ -10,14 +10,8 @@ spring:
           data-id: order-service-dev.yaml
           group: DEFAULT_GROUP
           refresh: true
-        extension-configs[1]:
-          data-id: config-dev.yaml
-          group: DEFAULT_GROUP
-          refresh: true
-        extension-configs[2]:
-          data-id: redis.yaml
-          group: DEFAULT_GROUP
-          refresh: true
   profiles:
     active: dev
+
+
 
