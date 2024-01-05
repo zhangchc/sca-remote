@@ -17,9 +17,7 @@ import java.util.Map;
 @Slf4j
 public class JwtTokenUtil {
 
-//    public static final String CLAIM_KEY_ACCOUNT_TYPE = "accountType";
     public static final String CLAIM_KEY_USER_ID = "userId";
-//    public static final String CLAIM_KEY_ENTERPRISE_ID = "enterpriseId";
     public static final String CLAIM_KEY_USER_NAME = "userName";
 
     @Resource

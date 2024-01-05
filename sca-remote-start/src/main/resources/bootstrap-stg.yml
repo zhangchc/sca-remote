@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: ${env.stg.serverAddr}
+        namespace: ${env.stg.namespace}
+        group: DEFAULT_GROUP
+        file-extension: yaml
+#        username: nacos
+#        password: nacos
+        timeout: 3000
+
+
+
+

@@ -14,6 +14,8 @@ import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 import com.phoenix.sca.mapper.userinfo.UserInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +24,7 @@ import java.util.List;
 
 @Slf4j
 @Service
+@RefreshScope
 public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private UserInfoMapper userInfoMapper;
@@ -77,8 +80,11 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @param userRequest
      * @return
      */
+    @Value("${user.name}")
+    private String userName;
     public UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest) {
         UserInfoResponse response = null;
+        System.out.println(userName+"-------------");
         try {
             Long userId = userRequest.getUserId();
             UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);

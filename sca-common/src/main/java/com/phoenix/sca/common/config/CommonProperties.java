@@ -2,6 +2,7 @@ package com.phoenix.sca.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 
@@ -16,6 +17,7 @@ public class CommonProperties {
     private JwtConfig jwt;
 
     @Data
+    @RefreshScope
     public static class JwtConfig {
         private String tokenHeader;
         private String secret;
