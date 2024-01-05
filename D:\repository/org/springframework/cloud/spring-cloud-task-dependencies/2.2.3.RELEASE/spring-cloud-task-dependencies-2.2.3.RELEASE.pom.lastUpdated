@@ -1,5 +1,0 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Tue Jan 04 15:52:35 CST 2022
-http\://0.0.0.0/.error=Could not transfer artifact org.springframework.cloud\:spring-cloud-task-dependencies\:pom\:2.2.3.RELEASE from/to maven-default-http-blocker (http\://0.0.0.0/)\: Blocked mirror for repositories\: [nexus (http\://maven.yiyaowang.com/nexus/content/groups/public/, default, releases+snapshots)]
-https\://repo.maven.apache.org/maven2/.lastUpdated=1641282755632
-@default-maven-default-http-blocker-http\://0.0.0.0/.lastUpdated=1641282755435

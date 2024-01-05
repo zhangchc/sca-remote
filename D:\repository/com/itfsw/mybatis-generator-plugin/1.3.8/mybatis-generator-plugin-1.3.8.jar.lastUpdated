@@ -1,5 +1,0 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Tue Jan 04 15:33:57 CST 2022
-@default-nexus-http\://maven.yiyaowang.com/nexus/content/groups/public/.lastUpdated=1641281499238
-https\://repo.maven.apache.org/maven2/.lastUpdated=1641281637454
-http\://maven.yiyaowang.com/nexus/content/groups/public/.error=Could not transfer artifact com.itfsw\:mybatis-generator-plugin\:jar\:1.3.8 from/to nexus (http\://maven.yiyaowang.com/nexus/content/groups/public/)\: Connect to maven.yiyaowang.com\:80 [maven.yiyaowang.com/172.16.1.68] failed\: Operation timed out (Connection timed out)

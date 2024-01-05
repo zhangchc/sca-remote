@@ -1,5 +1,0 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Tue Jan 04 15:55:48 CST 2022
-http\://0.0.0.0/.error=Could not transfer artifact org.sonatype.aether\:aether-impl\:jar\:1.7 from/to maven-default-http-blocker (http\://0.0.0.0/)\: Blocked mirror for repositories\: [nexus (http\://maven.yiyaowang.com/nexus/content/groups/public/, default, releases+snapshots), apache.snapshots (http\://repository.apache.org/snapshots, default, snapshots)]
-https\://repo.maven.apache.org/maven2/.lastUpdated=1641282948369
-@default-maven-default-http-blocker-http\://0.0.0.0/.lastUpdated=1641282945354
