@@ -150,8 +150,8 @@ public class PayServiceImpl implements PayService {
         return null;
     }
 
-    public static void main(String[] args) {
-        PayServiceImpl s = new PayServiceImpl();
-        s.refound();
-    }
+//    public static void main(String[] args) {
+//        PayServiceImpl s = new PayServiceImpl();
+//        s.refound();
+//    }
 }
