@@ -16,9 +16,9 @@
         <!--数据库连接参数 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/saas_db?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                connectionURL="jdbc:mysql://47.101.214.221:3306/saas_db?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                 userId="root"
-                password="123456">
+                password="Zcc.1qaz">
         </jdbcConnection>
 
         <javaTypeResolver>

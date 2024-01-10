@@ -6,6 +6,7 @@ import com.phoenix.sca.common.config.CommonProperties;
 import com.phoenix.sca.common.response.PageResponseInfo;
 import com.phoenix.sca.common.response.ResponseCode;
 import com.phoenix.sca.common.response.ResponseInfo;
+import com.phoenix.sca.common.utils.ThreadLocalHelp;
 import com.phoenix.sca.facade.api.userinfo.UserInfoService;
 import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
 import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 
 @Slf4j
@@ -32,8 +32,7 @@ public class UserInfoController {
     @Autowired
     private CommonProperties commonProperties;
 
-    //    @Value(value="${common.jwt.tokenHeader}")
-//    private String token;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseInfo<UserInfoResponse> login(@RequestBody UserInfoRequest userInfoRequest) {
         if (StringUtils.isBlank(userInfoRequest.getUsername()) || StringUtils.isBlank(userInfoRequest.getPassword())) {
@@ -59,7 +58,8 @@ public class UserInfoController {
             log.error("参数为null");
             return ResponseInfo.paramError(ResponseCode.PARAM_ERROR_CODE.getMessage());
         }
-        log.info(commonProperties.getJwt().getTokenHeader() + "====");
+        log.info("用户名：{}@@token:{}",ThreadLocalHelp.getCurrentUserName(),ThreadLocalHelp.getCurrentAuthToken());
+
 
         log.info("查询用户信息 userId={}", JSONObject.toJSONString(userInfoRequest.getUserId()));
         UserInfoResponse userInfo = userInfoService.selectUserInfoByUserId(userInfoRequest);

@@ -96,6 +96,14 @@
     from sys_dept
     where dept_id = #{deptId,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByCond" parameterType="com.phoenix.sca.entity.sysdept.SysDept" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_dept
+    where enabled = #{enabled,jdbcType=BIT}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_dept
     where dept_id = #{deptId,jdbcType=BIGINT}
@@ -143,12 +151,9 @@
       <if test="updateBy != null">
         update_by,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
+
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="deptId != null">
@@ -175,11 +180,11 @@
       <if test="updateBy != null">
         #{updateBy,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createTime == null">
+        now(),
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="updateTime == null">
+        now(),
       </if>
     </trim>
   </insert>

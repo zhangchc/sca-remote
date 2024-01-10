@@ -84,7 +84,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     private String userName;
     public UserInfoResponse selectUserInfoByUserId(UserInfoRequest userRequest) {
         UserInfoResponse response = null;
-        System.out.println(userName+"-------------");
+        log.info(userName+"-------------");
         try {
             Long userId = userRequest.getUserId();
             UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);

@@ -16,5 +16,4 @@ public interface UserInfoService {
 
     Boolean updateUserInfoByUserId(UserInfoRequest userRequest);
 
-
 }

@@ -116,7 +116,7 @@ public class JwtTokenUtil {
     private String generateToken(Map<String, Object> claims, Long expiration) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000l))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000l))//2592000   =30天
                 .signWith(SignatureAlgorithm.HS512, commonProperties.getJwt().getSecret())
                 .compact();
     }

@@ -3,14 +3,14 @@ server:
 #各个环境抽离公共配置
 env:
   dev:
-    serverAddr: 127.0.0.1:8848
-    namespace: d04fa81b-7caa-460f-8f76-b5a5cc914948
+    serverAddr: 47.101.214.221:8848
+    namespace: 5b740aa1-4e53-41f8-af00-18ad6fc4ee6c
   stg:
     serverAddr: 127.0.0.1:8848
     namespace: c6c75515-ec12-4b9b-a560-4b18bdf0112d
   prod:
-    serverAddr: 127.0.0.1:8848
-    namespace: 5821e477-ac92-4868-9a57-57c93ee7f8ca
+    serverAddr: 47.101.214.221:8848
+    namespace: 257a60e7-581e-4e2f-ad5b-4f73233e258a
 spring:
   application:
     name: sca-remote

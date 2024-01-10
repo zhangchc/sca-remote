@@ -20,6 +20,8 @@ public interface SysDeptMapper {
 
     SysDept selectByPrimaryKey(Long deptId);
 
+    List<SysDept> selectByCond(SysDept sysDept);
+
     int updateByExampleSelective(@Param("record") SysDept record, @Param("example") SysDeptExample example);
 
     int updateByExample(@Param("record") SysDept record, @Param("example") SysDeptExample example);

@@ -36,11 +36,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Ordere
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserInfoService userInfoService;
-
-//    @Resource
-//    private YzPlatformTradeMpAdminService yzPlatformTradeMpAdminService;
-
-
     /**
      * 在一个请求进入Controller层方法执行前执行这个方法
      *
