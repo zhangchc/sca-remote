@@ -3,7 +3,7 @@ package com.phoenix.sca.service.api.userinfo.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.phoenix.sca.common.config.CommonProperties;
+import com.phoenix.sca.common.config.JWTCommonProperties;
 import com.phoenix.sca.common.exception.ServiceException;
 import com.phoenix.sca.common.response.ResponseCode;
 import com.phoenix.sca.common.utils.JwtTokenUtil;
@@ -33,7 +33,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private JwtTokenUtil jwtTokenUtil;
     @Resource
-    private CommonProperties commonProperties;
+    private JWTCommonProperties commonProperties;
 
     /**
      * 分页查询

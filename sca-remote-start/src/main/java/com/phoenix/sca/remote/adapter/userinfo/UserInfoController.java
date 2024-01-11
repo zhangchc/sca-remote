@@ -2,7 +2,7 @@ package com.phoenix.sca.remote.adapter.userinfo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.phoenix.sca.common.config.CommonProperties;
+import com.phoenix.sca.common.config.JWTCommonProperties;
 import com.phoenix.sca.common.response.PageResponseInfo;
 import com.phoenix.sca.common.response.ResponseCode;
 import com.phoenix.sca.common.response.ResponseInfo;
@@ -30,7 +30,7 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
-    private CommonProperties commonProperties;
+    private JWTCommonProperties commonProperties;
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

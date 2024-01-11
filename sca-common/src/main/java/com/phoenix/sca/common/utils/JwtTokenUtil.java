@@ -1,6 +1,6 @@
 package com.phoenix.sca.common.utils;
 
-import com.phoenix.sca.common.config.CommonProperties;
+import com.phoenix.sca.common.config.JWTCommonProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -8,8 +8,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +19,7 @@ public class JwtTokenUtil {
     public static final String CLAIM_KEY_USER_NAME = "userName";
 
     @Resource
-    private CommonProperties commonProperties;
+    private JWTCommonProperties commonProperties;
 
     /**
      * 从token中获取JWT中的负载

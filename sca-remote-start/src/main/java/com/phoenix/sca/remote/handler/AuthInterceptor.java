@@ -1,6 +1,6 @@
 package com.phoenix.sca.remote.handler;
 
-import com.phoenix.sca.common.config.CommonProperties;
+import com.phoenix.sca.common.config.JWTCommonProperties;
 import com.phoenix.sca.common.exception.ServiceException;
 import com.phoenix.sca.common.response.ResponseCode;
 import com.phoenix.sca.common.utils.JwtTokenUtil;
@@ -30,7 +30,7 @@ import java.util.Objects;
 public class AuthInterceptor extends HandlerInterceptorAdapter implements Ordered {
 
     @Resource
-    private CommonProperties commonProperties;
+    private JWTCommonProperties commonProperties;
 
     @Resource
     private JwtTokenUtil jwtTokenUtil;

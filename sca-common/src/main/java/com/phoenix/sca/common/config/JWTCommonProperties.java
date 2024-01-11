@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties("common")
-public class CommonProperties {
+public class JWTCommonProperties {
 
     /**
      * jwt相关配置

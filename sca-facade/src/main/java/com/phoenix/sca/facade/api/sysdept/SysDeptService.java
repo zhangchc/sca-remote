@@ -9,7 +9,7 @@ public interface SysDeptService {
 
     Boolean updateDeptInfo(SysDeptRequest request);
 
-    PageInfo<SysDeptResponse> selectUserInfoBycon(SysDeptRequest request);
+    PageInfo<SysDeptResponse> selectDdptBycon(SysDeptRequest request);
 
     SysDeptResponse selectUserInfoByUserId(SysDeptRequest request);
 }

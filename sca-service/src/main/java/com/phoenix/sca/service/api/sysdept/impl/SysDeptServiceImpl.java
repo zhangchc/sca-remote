@@ -51,7 +51,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     }
 
     @Override
-    public PageInfo<SysDeptResponse> selectUserInfoBycon(SysDeptRequest request) {
+    public PageInfo<SysDeptResponse> selectDdptBycon(SysDeptRequest request) {
         PageInfo<SysDeptResponse> resultDto;
         SysDept sysDept =mapperFacade.map(request, SysDept.class);
         PageHelper.startPage(Math.max(request.getPageNo(), 1), Math.min(request.getPageSize(), 100));

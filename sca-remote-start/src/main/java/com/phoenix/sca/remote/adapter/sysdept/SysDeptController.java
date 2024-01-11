@@ -8,8 +8,6 @@ import com.phoenix.sca.common.response.ResponseInfo;
 import com.phoenix.sca.facade.api.sysdept.SysDeptService;
 import com.phoenix.sca.facade.api.sysdept.dto.SysDeptRequest;
 import com.phoenix.sca.facade.api.sysdept.dto.SysDeptResponse;
-import com.phoenix.sca.facade.api.userinfo.dto.UserInfoRequest;
-import com.phoenix.sca.facade.api.userinfo.dto.UserInfoResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -47,7 +45,7 @@ public class SysDeptController {
     /**
      * 获取部门列表查询
      *
-     * @param userInfoRequest
+     * @param
      * @return
      */
     @RequestMapping(value = "/getDeptList", method = RequestMethod.POST)
@@ -59,7 +57,7 @@ public class SysDeptController {
             log.error("入参对象为null");
             return PageResponseInfo.paramError(ResponseCode.PARAM_ERROR_CODE.getMessage());
         }
-        PageInfo<SysDeptResponse> pageInfo = sysDeptService.selectUserInfoBycon(sysDeptRequest);
+        PageInfo<SysDeptResponse> pageInfo = sysDeptService.selectDdptBycon(sysDeptRequest);
         Long total = pageInfo.getTotal();
         result = PageResponseInfo.success(pageInfo.getList(), total.intValue());
         return result;
