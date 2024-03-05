@@ -11,10 +11,7 @@ import com.phoenix.sca.facade.api.sysdept.dto.SysDeptResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -42,6 +39,7 @@ public class SysDeptController {
         return ResponseInfo.build(ResponseCode.SYS_ERROR_CODE.getCode(), "新增部门信息异常！", null);
 
     }
+
     /**
      * 获取部门列表查询
      *
@@ -61,5 +59,19 @@ public class SysDeptController {
         Long total = pageInfo.getTotal();
         result = PageResponseInfo.success(pageInfo.getList(), total.intValue());
         return result;
+    }
+
+    /**
+     * 更新部门信息
+     * @param sysDeptRequest
+     * @return
+     */
+    @RequestMapping(value = "/updateDept", method = RequestMethod.POST)
+    public ResponseInfo updateDeptInfo(@RequestBody SysDeptRequest sysDeptRequest) {
+        Boolean result = sysDeptService.updateDeptInfo(sysDeptRequest);
+        if (result) {
+            return ResponseInfo.build(ResponseCode.SUCCESS_CODE.getCode(), "更新部门信息成功！", null);
+        }
+        return ResponseInfo.build(ResponseCode.SYS_ERROR_CODE.getCode(), "更新部门信息失败！", null);
     }
 }

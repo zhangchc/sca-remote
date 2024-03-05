@@ -6,10 +6,11 @@ spring:
         namespace: ${env.prod.namespace}
         group: DEFAULT_GROUP
         file-extension: yaml
-#        username: nacos
-#        password: nacos
+        username: nacos
+        password: nacos
         timeout: 3000
-
+      discovery:
+        server-addr:  ${env.prod.serverAddr}
 
 
 

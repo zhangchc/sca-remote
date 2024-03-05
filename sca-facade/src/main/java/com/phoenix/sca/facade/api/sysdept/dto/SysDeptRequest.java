@@ -20,6 +20,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class SysDeptRequest implements Serializable {
 
+    private Long deptId;
+
     private Long pid;
 
     private Integer subCount;

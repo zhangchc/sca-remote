@@ -47,7 +47,12 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Override
     public Boolean updateDeptInfo(SysDeptRequest request) {
-        return null;
+        SysDept sysDept =mapperFacade.map(request,SysDept.class);
+        int i =sysDeptfoMapper.updateByPrimaryKey(sysDept);
+        if(i>0){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
     @Override
