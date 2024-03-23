@@ -15,7 +15,7 @@ spring:
   application:
     name: sca-remote
   profiles:
-      active: dev   #激活的环境
+      active: dev #激活的环境
 
 
 

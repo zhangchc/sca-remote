@@ -12,7 +12,14 @@ spring:
         refresh-enabled: true
       discovery:
         server-addr:  ${env.dev.serverAddr}
-
-
-
+  redis:
+   host: 47.101.214.221
+   port: 6379
+   password: foobared
+   lettuce:
+     pool:
+       max-active: 8
+       max-wait: -1ms
+       max-idle: 8
+       min-idle: 0
 

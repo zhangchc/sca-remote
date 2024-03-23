@@ -23,8 +23,8 @@ public class WebConfig implements WebMvcConfigurer {
         /**
          * 添加验证token的拦截器
          */
-        registry.addInterceptor(getAuthInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login")
-                .excludePathPatterns("/pay/repay");
+//        registry.addInterceptor(getAuthInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login")
+//                .excludePathPatterns("/pay/repay");
 //        registry.addInterceptor(getCORSInterceptor()).addPathPatterns("/**");
     }
 

@@ -22,6 +22,8 @@ private UserInfoService userInfoService;
         userInfoService.selectUserInfoBycon(user);
     }
 
+
+
     @Before
     public void setup() throws IOException {
     }
